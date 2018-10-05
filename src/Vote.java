@@ -6,21 +6,8 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 /**
- * 
  * 	@author minchoba
- *	Naver Subject: 인기 투표
- *
- *		문제: 인기 투표가 진행된다.
- *			한 명당 자신이 좋아하는 사람의 이름 하나를 적어낸다.
- *			이때 최다 득표를 한 사람을 자동으로 뽑아낼 수 있는게 목표이다.
- *
- *		입력: 입력은 한 줄에 하나씩, EOF을 만날 때까지 들어온다.
- *			반드시 한줄 이상의 입력이 들어오며, 후보자의 이름은 최대 50자를 넘지 않는다.
- *			이름은 공백을 포함하지 않는 하나의 단어이다.
- *
- *		출력: 출력은 최대 득표자를 뽑되, 등률이 있을때는 사전식으로
- *			정렬된 순서로 한 줄에 하나씩 모두 출력한다.
- *
+ * 
  */
 public class Vote {
 	private static final char NEW_LINE = '\n';	// 개행 문자 상수
