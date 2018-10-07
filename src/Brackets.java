@@ -126,7 +126,7 @@ public class Brackets {
 	}
 	
 	/**
-	 * 결과적으로 스택 내부에 숫자가 아닌 괄호가 들어가있는지 확인하는 메소드
+	 * 모든 처리가 끝나고 스택 내부에 숫자가 아닌 괄호가 들어가있는지 확인하는 메소드, 괄호가 스택에 남아있다면, 그 문자열은 잘못된 괄호열
 	 * 
 	 */
 	private static boolean isBrace(String tmp) {
@@ -160,7 +160,7 @@ public class Brackets {
 			
 			else {								// 스택 중간 숫자가 있는 경우
 				if(num > MOD) num %= MOD;		// MOD 보다 큰 경우 나머지 연산을 실시하고
-				num += Integer.parseInt(lifo.pop());	// num의 값을 더해줌
+				num += Integer.parseInt(lifo.pop());	// num의 값을 더해줌 (괄호 사이에 끼워져 push 되어있던 문자열 타입의 숫자들)
 			}
 		}
 		
