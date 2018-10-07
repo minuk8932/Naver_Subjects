@@ -8,6 +8,9 @@ import java.util.Map.Entry;
 /**
  * 	@author minchoba
  * 
+ * 	실행시 EOF 감지를 하지 못합니다.
+ * 	따라서 입력 데이터를 복사해 넣으시고 'Enter'를 한번 더 입력해 주십시오.
+ * 
  */
 public class Vote {
 	private static final char NEW_LINE = '\n';	// 개행 문자 상수
@@ -19,14 +22,14 @@ public class Vote {
 		HashMap<String, Integer> hm = new HashMap<>();		// 후보자들의 이름과 받은 표수를 저장 할 해쉬맵 선언
 		
 		String input = EMPTY;
-		while((input = br.readLine()) != null) {		// EOF의 경우 반복문 종료 (End of File)
-			if (EMPTY.equals(input)) break;				// 또는 단지 빈 문자열 하나가 들어온 경우에도 반복문 종료. (EOF로 끝나지 않을 상황 대비)
+		while((input = br.readLine()) != null) {			// EOF의 경우 반복문 종료 (End of File)
+			if (EMPTY.equals(input)) break;					// 또는 단지 빈 문자열 하나가 들어온 경우에도 반복문 종료. (EOF로 끝나지 않을 상황 대비)
 			
-			if(hm.containsKey(input)) {				// 해쉬 맵에 해당 이름이 존재하는 경우
-				hm.put(input, hm.get(input) + 1);	// 그 이름, 이름의 득표수+1을 해쉬맵에 다시 put
+			if(hm.containsKey(input)) {						// 해쉬 맵에 해당 이름이 존재하는 경우
+				hm.put(input, hm.get(input) + 1);			// 그 이름, 이름의 득표수+1을 해쉬맵에 다시 put
 			}
 			else {
-				hm.put(input, 1);					// 해쉬맵에 없는 경우 이름, 득표수: 1 저장
+				hm.put(input, 1);							// 해쉬맵에 없는 경우 이름, 득표수: 1 저장
 			}
 		}
 		br.close();					// 입력이 끝남, 버퍼 닫음
@@ -41,21 +44,21 @@ public class Vote {
 		ArrayList<MaxPeople> mp = new ArrayList<>();
 		
 		for(Entry<String, Integer> e: hm.entrySet()) {
-			if(e.getValue() == max){				// 동률이 있을 경우를 대비하여 리스트에 최고 득표수를 갖는 사람의 이름을 모두 저장
+			if(e.getValue() == max){						// 동률이 있을 경우를 대비하여 리스트에 최고 득표수를 갖는 사람의 이름을 모두 저장
 				mp.add(new MaxPeople(e.getKey()));
 			}
 		}
 		
-		Collections.sort(mp);					//  class 팀 sort 활용하여 리스트 정렬
+		Collections.sort(mp);								//  class 팀 sort 활용하여 리스트 정렬
 		
 		StringBuilder sb = new StringBuilder();
 		int mpSize = mp.size();
 		
-		for(int i = 0; i < mpSize; i++) {				// 리스트에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
+		for(int i = 0; i < mpSize; i++) {					// 리스트에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
 			sb.append(mp.get(i).name).append(NEW_LINE);
 		}
 		
-		System.out.println(sb.toString());				// 출력 예제에 따라 결과 값 한번에 출력
+		System.out.println(sb.toString());					// 출력 예제에 따라 결과 값 한번에 출력
 	}
 	
 	/**
