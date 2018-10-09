@@ -1,9 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 
 /**
  * 	@author minchoba
@@ -41,21 +40,20 @@ public class Vote {
 		}
 		
 		int idx = 0;
-		ArrayList<MaxPeople> mp = new ArrayList<>();
+		PriorityQueue<MaxPeople> pq = new PriorityQueue<>();	// ArrayList -> Priority 수정
+												// 어차피 결과 출력시 뽑아내어도 될 값이고, 리스트 내부 정렬도 필요하기 때문에, 이 모두를 만족 할 수 있는 우선순위 큐 사용
 		
 		for(Entry<String, Integer> e: hm.entrySet()) {
 			if(e.getValue() == max){						// 동률이 있을 경우를 대비하여 리스트에 최고 득표수를 갖는 사람의 이름을 모두 저장
-				mp.add(new MaxPeople(e.getKey()));
+				pq.offer(new MaxPeople(e.getKey()));
 			}
 		}
 		
-		Collections.sort(mp);								//  class 팀 sort 활용하여 리스트 정렬
-		
 		StringBuilder sb = new StringBuilder();
-		int mpSize = mp.size();
+		int pqSize = pq.size();
 		
-		for(int i = 0; i < mpSize; i++) {					// 리스트에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
-			sb.append(mp.get(i).name).append(NEW_LINE);
+		while(pqSize-- > 0) {					// 우선순위 큐에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
+			sb.append(pq.poll().name).append(NEW_LINE);
 		}
 		
 		System.out.println(sb.toString());					// 출력 예제에 따라 결과 값 한번에 출력
