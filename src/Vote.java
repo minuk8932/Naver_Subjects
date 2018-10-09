@@ -39,8 +39,7 @@ public class Vote {
 			if(e.getValue() > max) max = e.getValue();		// 최고 득표수를 max에 뽑아냄
 		}
 		
-		int idx = 0;
-		PriorityQueue<MaxPeople> pq = new PriorityQueue<>();	// ArrayList -> Priority 수정
+		PriorityQueue<MaxPeople> pq = new PriorityQueue<>();	// ArrayList -> PriorityQueue 수정
 												// 어차피 결과 출력시 뽑아내어도 될 값이고, 리스트 내부 정렬도 필요하기 때문에, 이 모두를 만족 할 수 있는 우선순위 큐 사용
 		
 		for(Entry<String, Integer> e: hm.entrySet()) {
@@ -50,9 +49,8 @@ public class Vote {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		int pqSize = pq.size();
 		
-		while(pqSize-- > 0) {					// 우선순위 큐에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
+		while(!pq.isEmpty()) {					// 우선순위 큐에 사전순으로 담긴 이름들을 하나씩 개행 문자와 함께 버퍼에 담고
 			sb.append(pq.poll().name).append(NEW_LINE);
 		}
 		
@@ -72,7 +70,7 @@ public class Vote {
 		}
 
 		@Override
-		public int compareTo(MaxPeople mp) {				// 여러 이름들이 존재할 경우, 대소문자 구문없이 사전순으로 정렬함
+		public int compareTo(MaxPeople mp) {				// 여러 이름들이 존재할 경우, 대소문자 구분없이 사전순으로 정렬함
 			return this.name.compareToIgnoreCase(mp.name);
 		}
 	}
